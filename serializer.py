@@ -3,10 +3,8 @@ from typing import Tuple, List, Dict
 from pprint import pprint
 from loguru import logger
 
+
 logger.add('debug.log', format='{time} {level} {message}', level='ERROR')
-
-
-META_MANIFEST_MF_LINK: str = 'MANIFEST.MF'
 
 
 @logger.catch
@@ -17,11 +15,11 @@ def get_delimiter_index(line):
     return delimiter_index
 
 
-@logger.catch
+# @logger.catch
 def get_file_lines(file_path: str) -> List[str]:
-    if not path.isfile(META_MANIFEST_MF_LINK):
-        raise FileNotFoundError(META_MANIFEST_MF_LINK)
-    elif stat(META_MANIFEST_MF_LINK).st_size < 1:
+    if not path.isfile(file_path):
+        raise FileNotFoundError(file_path)
+    elif stat(file_path).st_size < 1:
         raise RuntimeError('Файл пустой.')
 
     with open(file_path, 'r', encoding='UTF-8') as f:
@@ -60,6 +58,8 @@ def serialize_mf_to_dict(lines: List[str], skipped_fields='') -> Dict[str, str]:
 
 @logger.catch
 def main():
+    META_MANIFEST_MF_LINK: str = 'MANIFEST.MF'
+
     skipped: Tuple[str, ...] = ('exclude this key', )
 
     all_lines: List[str, ...] = get_file_lines(file_path=META_MANIFEST_MF_LINK)

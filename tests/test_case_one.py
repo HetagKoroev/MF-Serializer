@@ -2,8 +2,12 @@ from os import path, stat
 from serializer import get_file_lines
 from serializer import serialize_mf_to_dict
 from serializer import get_delimiter_index
-from serializer import META_MANIFEST_MF_LINK
 import pytest
+
+
+META_MANIFEST_MF_LINK = 'MANIFEST.MF'
+EMPTY_META_MANIFEST_MF_LINK = 'EMPTY_MANIFEST.MF'
+FAKE_FILE = 'DFDF.MF'
 
 
 def test_file_existing():
@@ -13,9 +17,9 @@ def test_file_existing():
 
 def test_check_file_not_found_error():
     """Проверка возбуждения ошибки при отсутствии .mf файла"""
-    if not path.isfile(META_MANIFEST_MF_LINK):
+    if not path.isfile(FAKE_FILE):
         with pytest.raises(FileNotFoundError):
-            get_file_lines(META_MANIFEST_MF_LINK)
+            get_file_lines(FAKE_FILE)
 
 
 def test_check_file_is_empty_error():
