@@ -3,7 +3,7 @@
 ".MF" to "Python dict object" - serializer.
 
 -------------------------------------------
-Run tests                    
+Run tests:              
 
 pip install pytest
 
