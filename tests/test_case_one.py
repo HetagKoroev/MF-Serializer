@@ -10,11 +10,6 @@ EMPTY_META_MANIFEST_MF_LINK = 'EMPTY_MANIFEST.MF'
 FAKE_FILE = 'DFDF.MF'
 
 
-def test_file_existing():
-    """Проверить существование файла .mf"""
-    assert path.isfile(META_MANIFEST_MF_LINK)
-
-
 def test_check_file_not_found_error():
     """Проверка возбуждения ошибки при отсутствии .mf файла"""
     if not path.isfile(FAKE_FILE):
