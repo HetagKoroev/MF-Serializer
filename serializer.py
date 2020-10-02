@@ -1,4 +1,4 @@
-"""Сериализатор .MF в Python dict"""
+"""Сериализатор .MF -> Python dict"""
 
 from os import path, stat
 from typing import Tuple, List, Dict
@@ -18,7 +18,7 @@ def get_delimiter_index(line):
     return delimiter_index
 
 
-# @logger.catch
+@logger.catch
 def get_file_lines(file_path: str) -> List[str]:
     """Считать строки из файла и вернуть список строк."""
     if not path.isfile(file_path):
