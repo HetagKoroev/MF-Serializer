@@ -1,5 +1,6 @@
 """Сериализатор .MF -> Python dict"""
 
+
 from os import path, stat
 from typing import Tuple, List, Dict
 from pprint import pprint
@@ -11,7 +12,7 @@ logger.add('debug.log', format='{time} {level} {message}', level='ERROR')
 
 @logger.catch
 def get_delimiter_index(line):
-    """Возвращает индекс разделителя."""
+    """Возвращает индекс разделителя"""
     double_dot_index: int = line.find(':')
     compare_op_dot_index: int = line.find('=')
     delimiter_index: int = double_dot_index if compare_op_dot_index == -1 else compare_op_dot_index
@@ -20,7 +21,7 @@ def get_delimiter_index(line):
 
 @logger.catch
 def get_file_lines(file_path: str) -> List[str]:
-    """Считать строки из файла и вернуть список строк."""
+    """Считать строки из файла и вернуть список строк"""
     if not path.isfile(file_path):
         raise FileNotFoundError(file_path)
 
@@ -34,10 +35,10 @@ def get_file_lines(file_path: str) -> List[str]:
 
 @logger.catch
 def serialize_mf_to_dict(lines: List[str], skipped_fields='') -> Dict[str, str]:
-    """ Принимает список строк и возвращает dict."""
+    """ Принимает список строк и возвращает dict"""
     props_result: Dict[str: str, ...] = {}
     skipped: bool = False
-    # Если строка пуста или находится в skipped_fields - пропускаем весь атрибут.
+    # Если строка пуста или находится в skipped_fields - пропускаем весь атрибут
     for i, prop_line in enumerate(lines):
         prop_line_stripped = prop_line.strip()
         if (not prop_line_stripped)\
@@ -55,7 +56,7 @@ def serialize_mf_to_dict(lines: List[str], skipped_fields='') -> Dict[str, str]:
         else:
             if skipped:
                 continue
-            # Перебираем предыдущие строки пока не добрались до ключа атрибута.
+            # Перебираем предыдущие строки пока не добрались до ключа атрибута
             while lines[i - 1].startswith(' '):
                 i -= 1
 
@@ -67,7 +68,7 @@ def serialize_mf_to_dict(lines: List[str], skipped_fields='') -> Dict[str, str]:
 
 @logger.catch
 def main():
-    """Точка входа."""
+    """Точка входа"""
 
     meta_manifest_mf_link: str = 'MANIFEST.MF'
 
