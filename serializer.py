@@ -42,8 +42,7 @@ def serialize_mf_to_dict(lines: List[str], skipped_fields='') -> Dict[str, str]:
     for i, prop_line in enumerate(lines):
         prop_line_stripped = prop_line.strip()
         if (not prop_line_stripped)\
-                or (prop_line_stripped[:get_delimiter_index(prop_line_stripped)]
-                    in [*skipped_fields]) \
+                or (prop_line_stripped[:get_delimiter_index(prop_line_stripped)] in [*skipped_fields]) \
                 or (skipped and prop_line.startswith(' '))\
                 or any([prop_line_stripped.startswith(ch) for ch in ('!', '#')]):
             skipped = True
@@ -72,6 +71,7 @@ def main():
 
     meta_manifest_mf_link: str = 'MANIFEST.MF'
 
+    # Перечень ключей которые нужно пропустить
     skipped: Tuple[str, ...] = ('exclude this key', )
 
     all_lines: List[str, ...] = get_file_lines(file_path=meta_manifest_mf_link)
